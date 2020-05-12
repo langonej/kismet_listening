@@ -6,7 +6,7 @@ import sys
 import datetime
 import argparse
 
-parser = argparse.ArgumentParser(description="Print a list of connected clients for the given")
+parser = argparse.ArgumentParser(description="Print a list of seen clients")
 parser.add_argument("--in", action="store", dest="infile", required=True, help='Input file ')
 parameters = parser.parse_args()
 
