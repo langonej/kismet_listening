@@ -16,7 +16,7 @@ epoch_time = int(time.time())
 #print(epoch_time)
 #print("back time")
 back_time = (epoch_time-360)
-#print(back_time)
+#print(back_time) back time is how many seconds to go back - in this example we are looking for devices seen in last 3min
 class Object:
     def toJSON(self):
         return json.dumps(self, default=lambda o: o.__dict__, 
@@ -29,14 +29,14 @@ def readSqliteTable():
         #print("Connected to SQLite")
         #print(back_time)
         sqlite_select_query = "SELECT * from devices where (last_time>? AND last_time>first_time+120)"
+        #this looks for devices seen in last 3 min aka back_time and seen at least 2 min after seeing for the very first time
+        #this ensures that people driving by and in range for less than 2 minutes are not picked up
         cursor.execute(sqlite_select_query,(back_time,))
         records = cursor.fetchall()
         #print("Total rows are:  ", len(records))
         #print("Printing each row")
         for row in records:
             #print("Zero: ", row[4])
-            #sniffing = json.dumps(row[14])
-            #print(row[14].toJSON())
             f1=open('./temp.json', 'w+')
             f1.write(row[14])
             f1.close()
@@ -54,23 +54,6 @@ def readSqliteTable():
             # Closing file
             f.close()
             print(row[4],whatdevice)
-            #print(sniffing)
-            #print("1: ", row[1]) 
-            #print("2: ", row[2])
-            #print("3: ", row[3])
-            #print("4: ", row[4])
-            #print("5: ", row[5])
-            #print("6: ", row[6])
-            #print("7: ", row[7])
-            #print("8: ", row[8])
-            #print("9: ", row[9])
-            #print("10: ", row[10])
-            #print("11: ", row[11])
-            #print("12: ", row[12])
-            #print("13: ", row[13])
-            #print("14: ", row[14])
-            #y=json(row[14])
-            #print(y)
             print("\n")
 
         cursor.close()
