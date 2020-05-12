@@ -48,7 +48,7 @@ def readSqliteTable():
             jiggadata = json.load(f)
             whatdevice = ""
             # Iterating through the json
-            # list
+            # let's get the manufacturer which is buried in device.devices a JSON BLOB
             for i in jiggadata['kismet.device.base.manuf']:
                 whatdevice = whatdevice + i
             # Closing file
